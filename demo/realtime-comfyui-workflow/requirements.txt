@@ -1,18 +1,43 @@
+# Core dependencies for StreamDiffusion
+# PyTorch installation (use CUDA 11.8 or 12.1 based on your system)
+# For CUDA 11.8: pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+# For CUDA 12.1: pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+torch
 diffusers==0.24.0
 transformers==4.35.2
---extra-index-url https://download.pytorch.org/whl/cu121;
-torch
+accelerate==0.24.0
 numpy<2.0
+Pillow==10.1.0
+
+# Web framework
 fastapi==0.104.1
 uvicorn[standard]==0.24.0.post1
-Pillow==10.1.0
-accelerate==0.24.0
-compel==2.0.2
-controlnet-aux==0.0.7
+pydantic
+
+# Optional dependencies for LoRA
 peft==0.6.0
-xformers; sys_platform != 'darwin' or platform_machine != 'arm64'
-markdown2
+compel==2.0.2
+
+# Hugging Face
 huggingface_hub<0.20.0
-# stable_fast 需要单独安装，请运行: pip install install_stable_fast.py 或手动下载安装
-# stable_fast @ https://github.com/chengzeyi/stable-fast/releases/download/v0.0.15.post1/stable_fast-0.0.15.post1+torch211cu121-cp310-cp310-manylinux2014_x86_64.whl; sys_platform=='linux'
+
+# Utilities
+markdown2
+
+# Acceleration (xformers - recommended for most users)
+xformers; sys_platform != 'darwin' or platform_machine != 'arm64'
+
+# TensorRT dependencies (optional, for TensorRT acceleration)
+# Install via: python -m streamdiffusion.tools.install-tensorrt
+# or manually:
+# polygraphy
+# onnx-graphsurgeon
+# cuda-python==12.4.0  # Important: Use 12.4.0 for compatibility
+# nvidia-tensorrt  # Install via streamdiffusion.tools.install-tensorrt
+
+# Note: TensorRT installation is complex and requires:
+# 1. Matching CUDA version with PyTorch
+# 2. Correct polygraphy and onnx-graphsurgeon versions
+# 3. cuda-python 12.4.0 (not 13.x)
+# See TENSORRT_SETUP.md and install_tensorrt_fix.sh for details
 
