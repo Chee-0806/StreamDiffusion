@@ -59,7 +59,7 @@
 
   $: isLCMRunning = $lcmLiveStatus !== LCMLiveStatus.DISCONNECTED;
   $: if ($lcmLiveStatus === LCMLiveStatus.TIMEOUT) {
-    warningMessage = 'Session timed out. Please try again.';
+    warningMessage = '会话超时，请重试。';
   }
   let disabled = false;
   async function toggleLcmLive() {
@@ -102,13 +102,13 @@
     {/if}
     {#if maxQueueSize > 0}
       <p class="text-sm">
-        There are <span id="queue_size" class="font-bold">{currentQueueSize}</span>
-        user(s) sharing the same GPU, affecting real-time performance. Maximum queue size is {maxQueueSize}.
+        当前有 <span id="queue_size" class="font-bold">{currentQueueSize}</span>
+        个用户共享同一 GPU，可能影响实时性能。最大队列大小为 {maxQueueSize}。
         <a
           href="https://huggingface.co/spaces/radames/Real-Time-Latent-Consistency-Model?duplicate=true"
           target="_blank"
-          class="text-blue-500 underline hover:no-underline">Duplicate</a
-        > and run it on your own GPU.
+          class="text-blue-500 underline hover:no-underline">复制</a
+        >并在自己的 GPU 上运行。
       </p>
     {/if}
   </article>
@@ -128,9 +128,9 @@
       <div class="sm:col-span-2">
         <Button on:click={toggleLcmLive} {disabled} classList={'text-lg my-1 p-2'}>
           {#if isLCMRunning}
-            Stop
+            停止
           {:else}
-            Start
+            开始
           {/if}
         </Button>
         <PipelineOptions {pipelineParams}></PipelineOptions>
@@ -140,7 +140,7 @@
     <!-- loading -->
     <div class="flex items-center justify-center gap-3 py-48 text-2xl">
       <Spinner classList={'animate-spin opacity-50'}></Spinner>
-      <p>Loading...</p>
+      <p>加载中...</p>
     </div>
   {/if}
 </main>

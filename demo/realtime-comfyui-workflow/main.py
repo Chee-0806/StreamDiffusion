@@ -150,6 +150,16 @@ class App:
                 }
             )
 
+        # LoRA 预设列表接口
+        @self.app.get("/api/lora-presets")
+        async def lora_presets():
+            """返回可用的 LoRA 预设列表"""
+            return JSONResponse({
+                "presets": pipeline.LORA_PRESETS,
+                "current_lora": pipeline.current_lora if hasattr(pipeline, 'current_lora') else None,
+                "mirror_info": "使用 HuggingFace 国内镜像 (hf-mirror.com) 自动下载"
+            })
+
         if not os.path.exists("public"):
             os.makedirs("public")
 
